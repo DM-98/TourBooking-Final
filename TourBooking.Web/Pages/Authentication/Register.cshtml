@@ -1,0 +1,88 @@
+﻿@page "/{handle}/register"
+
+@model RegisterModel
+
+@{
+    ViewData[Globals.Title] = Globals.TitleRegisterUser;
+    ViewData[Globals.CurrentPage] = Globals.PageLogin;
+}
+
+<div class="container">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="container-fluid card mb-4">
+                <div class="card-body p-4 text-center">
+                    <div class="mb-md-2 mt-md-4 pb-2">
+                        <form method="post" asp-page-handler="RegisterBooker">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger fade show"></div>
+
+                            <label><h2 class="fw-bold mb-2 text-uppercase">Register a user</h2></label>
+
+                            <hr />
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label required" asp-for="RegisterBookerInputModel.Email"></label>
+                                <input type="email" asp-for="RegisterBookerInputModel.Email" class="form-control form-control-lg" />
+                                <span asp-validation-for="RegisterBookerInputModel.Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label required" asp-for="RegisterBookerInputModel.FirstName"></label>
+                                <input type="text" asp-for="RegisterBookerInputModel.FirstName" class="form-control form-control-lg" />
+                                <span asp-validation-for="RegisterBookerInputModel.FirstName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label required" asp-for="RegisterBookerInputModel.LastName"></label>
+                                <input type="text" asp-for="RegisterBookerInputModel.LastName" class="form-control form-control-lg" />
+                                <span asp-validation-for="RegisterBookerInputModel.LastName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label" asp-for="RegisterBookerInputModel.PhoneNumber"></label>
+                                <input type="text" asp-for="RegisterBookerInputModel.PhoneNumber" class="form-control form-control-lg" />
+                                <span asp-validation-for="RegisterBookerInputModel.PhoneNumber" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label" asp-for="RegisterBookerInputModel.Organization"></label>
+                                <input type="text" asp-for="RegisterBookerInputModel.Organization" class="form-control form-control-lg" />
+                                <span asp-validation-for="RegisterBookerInputModel.Organization" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label required" asp-for="RegisterBookerInputModel.Password"></label>
+                                <input type="password" asp-for="RegisterBookerInputModel.Password" class="form-control form-control-lg" />
+                                <span asp-validation-for="RegisterBookerInputModel.Password" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label required" asp-for="RegisterBookerInputModel.ConfirmPassword"></label>
+                                <input type="password" asp-for="RegisterBookerInputModel.ConfirmPassword" class="form-control form-control-lg" />
+                                <span asp-validation-for="RegisterBookerInputModel.ConfirmPassword" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="checkbox" asp-for="RegisterBookerInputModel.IsTermsAccepted" class="form-check-input" id="isTermsAccepted" />
+                                <label class="form-check-label required" asp-for="RegisterBookerInputModel.IsTermsAccepted" for="isTermsAccepted"></label>
+                                <span asp-validation-for="RegisterBookerInputModel.IsTermsAccepted" class="text-danger form-check-inline"></span>
+                            </div>
+
+                            <button id="submitId" class="btn btn-company btn-lg w-100" style="margin-bottom: 2em;" type="submit" onclick="submitClick()">
+                                <span id="spanId" class="spinner-border spinner-border-sm mr-2 d-none"></span> Register user
+                            </button>
+
+                            <a class="fw-bold" href="/@Model.Company!.Handle/log-ind">Back to login</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

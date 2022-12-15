@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BookerListDTO>
+
+<div class="container-fluid p-3 mb-3 border">
+    <h5>Bookers</h5>
+
+    <div onbeforeunload="destroyDataTable('#booker-datatable')">
+        <table id="booker-datatable" class="table table-striped table-hover table-bordered display pt-2" style="width: 100%">
+            <thead style="background-color: #c6c6c6">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    <th>Organization</th>
+                    <th>Date created</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var booker in Model)
+                {
+                    <tr>
+                        <td>@booker.Name</td>
+                        <td>@booker.Email</td>
+                        <td>@(Html.Raw(booker.PhoneNumber ?? "<i>Ikke angivet</i>"))</td>
+                        <td>@booker.Organization</td>
+                        <td>@booker.CreatedDate.FormatTime()</td>
+                        <td><a href="/booker/@booker.Id"><span class="details-eye" style="color: @ViewData[Globals.CompanyButtonColor]"></span></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

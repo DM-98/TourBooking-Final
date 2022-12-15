@@ -1,0 +1,29 @@
+﻿@page "/register/{roleType}"
+
+@model CreateModel
+
+@{
+    ViewData[Globals.Title] = Globals.TitleRegisterUser;
+    ViewData[Globals.CurrentPage] = Globals.PageAllRegistered;
+}
+
+@{
+    switch (Model.SelectedRoleType)
+    {
+        case RoleType.Admin:
+            @await Html.PartialAsync("~/Pages/AdminPanel/Users/Create/AdminRole/_AdminCreate.cshtml", Model.RegisterAdminInputModel!)
+            break;
+        case RoleType.Employee:
+            @await Html.PartialAsync("~/Pages/AdminPanel/Users/Create/EmployeeRole/_EmployeeCreate.cshtml", new RegisterEmployeeViewModel(Model.RegisterEmployeeInputModel!, Model.Companies!))
+            break;
+        default:
+            <p style="color:red">Ugyldig brugertype.</p>
+            break;
+    }
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

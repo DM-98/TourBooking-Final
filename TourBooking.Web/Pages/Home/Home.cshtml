@@ -1,0 +1,23 @@
+﻿@page "/{handle}"
+
+@model HomeModel
+
+@{
+	ViewData[Globals.Title] = ViewData[Globals.CompanyName];
+	ViewData[Globals.CurrentPage] = Globals.PageHome;
+}
+
+<div class="container-fluid p-3 mb-3 border bg-white">
+	<h4>@(string.IsNullOrWhiteSpace(Model.Company?.Name) ? "TourBooking" : Model.Company?.Name) - Home</h4>
+
+	<hr />
+
+	@if (User.Identity?.IsAuthenticated ?? false)
+	{
+			<p>You are logged in as: @User.Identity.Name</p>
+	}
+	else
+	{
+			<p>You are not logged in.</p>
+	}
+</div>

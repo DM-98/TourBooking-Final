@@ -1,0 +1,11 @@
+﻿@page "/{handle}/unauthorized"
+
+@model UnauthorizedModel
+
+@{
+    ViewData[Globals.Title] = Globals.TitleUnauthorized;
+}
+
+<div class="container-fluid p-3 mb-3 border bg-white">
+    <h3>Access denied. <a asp-page="/Authentication/Login" asp-route-handle="@Model.Company?.Handle" asp-route-returnUrl="@(string.IsNullOrWhiteSpace(Request.Query["returnUrl"].ToString()) ? Request.Path : Request.Query["returnUrl"].ToString())">Login</a> with a user that has access.</h3>
+</div>

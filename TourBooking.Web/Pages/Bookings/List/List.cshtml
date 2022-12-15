@@ -1,0 +1,61 @@
+﻿@page "/{handle}/bookings"
+
+@model ListModel
+
+@{
+    ViewData[Globals.Title] = Globals.TitleBookings;
+    ViewData[Globals.CurrentPage] = Globals.PageBookings;
+}
+
+<div class="container-fluid p-3 mb-3 border bg-white">
+    <h4>@(Model.IsInRoleEmployeeForCurrentCompany || Model.IsInRoleAdmin ? Globals.TitleBookings : Globals.TitleMyBookings)</h4>
+
+    @if (Model.Company is not null)
+    {
+        <a class="btn btn-company" href="/@Model.Company!.Handle/@Globals.PageCreateBooking">Create a new booking</a>
+    }
+
+    <hr />
+
+    <div onbeforeunload="destroyDataTable('#bookings-datatable')">
+        <table id="bookings-datatable" class="table table-striped table-hover table-bordered display pt-2" style="width: 100%">
+            <thead style="background-color: #c6c6c6">
+                <tr>
+                    <th>Status</th>
+                    <th>Organization</th>
+                    <th>Desired date and time</th>
+                    <th>Package / location</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    <th>Date created</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var booking in Model.Bookings ?? new List<BookingListDTO>())
+                {
+                    <tr>
+                        <td class="fw-bold" style="color: @(booking.BookingStatus == BookingStatus.Active ? "green" : "#990000")">@booking.BookingStatus.EnumToString()</td>
+                        <td>@booking.Organization</td>
+                        <td>@booking.DateTime.FormatTime()</td>
+                        <td>@booking.PackageName</td>
+                        <td>@booking.UserName</td>
+                        <td>@booking.Email</td>
+                        <td>@(Html.Raw(booking.PhoneNumber ?? "<i>Ikke angivet</i>"))</td>
+                        <td>@booking.CreatedDate.FormatTime()</td>
+                        <td><a href="/@Model.Company!.Handle/booking/@booking.Id"><span class="details-eye" style="color: @ViewData[Globals.CompanyButtonColor]"></span></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            initializeDataTable('#bookings-datatable');
+        });
+    </script>
+}

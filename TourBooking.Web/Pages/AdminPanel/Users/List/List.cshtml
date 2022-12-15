@@ -1,0 +1,40 @@
+﻿@page "/all-registered"
+
+@model ListModel
+
+@{
+    ViewData[Globals.Title] = Globals.TitleAllRegistered;
+    ViewData[Globals.CurrentPage] = Globals.PageAllRegistered;
+}
+
+<div class="container-fluid p-3 mb-3 border bg-white">
+    <h4>All registered users in TourBooking</h4>
+    <a class="btn btn-company" href="/register/employee">Register a new employee</a>
+    <a class="btn btn-company" href="/register/admin">Register a new administrator</a>
+
+    <hr />
+
+    @if (Model.Admins is null || Model.Employees is null || Model.Bookers is null)
+    {
+        <p>Failed to fetch users.</p>
+    }
+    else
+    {
+        @await Html.PartialAsync("~/Pages/AdminPanel/Users/List/AdminRole/_AdminList.cshtml", Model.Admins)
+
+        @await Html.PartialAsync("~/Pages/AdminPanel/Users/List/EmployeeRole/_EmployeeList.cshtml", Model.Employees)
+
+        @await Html.PartialAsync("~/Pages/AdminPanel/Users/List/BookerRole/_BookerList.cshtml", Model.Bookers)
+    }
+    
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            initializeDataTable('#admin-datatable');
+            initializeDataTable('#employee-datatable');
+            initializeDataTable('#booker-datatable');
+        });
+    </script>
+}

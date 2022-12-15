@@ -1,0 +1,162 @@
+﻿@page "/company/{handle}"
+
+@model DetailsModel
+
+@{
+    ViewData[Globals.Title] = Globals.TitleCompanyDetails;
+    ViewData[Globals.CurrentPage] = Globals.PageAllCompanies;
+}
+
+<div class="container-fluid p-3 mb-3 border bg-white col-xs-12 col-sm-10 col-md-8 col-lg-6 col-xxl-4">
+    <h4 class="text-center">Company details</h4>
+
+    <hr />
+
+    @if (Model.SelectedCompany is null)
+    {
+        <p>Failed to fetch company.</p>
+    }
+    else
+    {
+        <h4><b>The company</b></h4>
+
+        <b>Name: </b> <p>@Model.SelectedCompany.Name</p>
+        <b>Handle: </b> <p><a href="/@Model.SelectedCompany.Handle" target="_blank">/@Model.SelectedCompany.Handle</a></p>
+        <b>Phone number: </b> <p>@Model.SelectedCompany.PhoneNumber</p>
+        <b>Logo URL: </b> <p><a href="@Model.SelectedCompany.LogoUrl" target="_blank">@Model.SelectedCompany.LogoUrl</a></p>
+        <b>Website: </b> <p><a href="@Model.SelectedCompany.Website" target="_blank">@Model.SelectedCompany.Website</a></p>
+
+        <h4><b>The headquarter</b></h4>
+
+        <b>Streetname: </b> <p>@Model.SelectedCompany.HeadquarterStreetName</p>
+        <b>City: </b> <p>@Model.SelectedCompany.HeadquarterCity</p>
+        <b>ZIP code: </b> <p>@Model.SelectedCompany.HeadquarterZipCode</p>
+
+        <h4><b>Current primary theme</b></h4>
+
+        <b>Background color: </b> <p><input class="w-100" type="color" value="@Model.SelectedCompany.PrimaryBackgroundColor" disabled /></p>
+        <b>Container color: </b> <p><input class="w-100" type="color" value="@Model.SelectedCompany.PrimaryContainerColor" disabled /></p>
+        <b>Text color: </b> <p><input class="w-100" type="color" value="@Model.SelectedCompany.PrimaryTextColor" disabled /></p>
+        <b>Button color: </b> <p><input class="w-100" type="color" value="@Model.SelectedCompany.PrimaryButtonColor" disabled /></p>
+        <b>Navigation background color: </b> <p><input class="w-100" type="color" value="@Model.SelectedCompany.PrimaryNavigationBackgroundColor" disabled /></p>
+        <b>Navigation button text color: </b> <p><input class="w-100" type="color" value="@Model.SelectedCompany.PrimaryNavigationButtonTextColor" disabled /></p>
+
+        <hr />
+
+        <div class="accordion mb-3">
+            <div class="accordion-item">
+                <a class="btn btn-outline-light accordion-button collapsed bg-light" data-bs-toggle="collapse" data-bs-target="#collapseEmployees">Show all employees</a>
+                <div class="collapse row" id="collapseEmployees">
+                    @if (Model.SelectedCompany.Employees?.Any() ?? false)
+                    {
+                        foreach (var employee in Model.SelectedCompany.Employees)
+                        {
+                            <div class="accordion-body col">
+                                <a href="/employee/@employee.Id" target="_blank" class="btn btn-outline-dark w-100">@employee.ApplicationUser.UserName</a>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="accordion-body col">
+                            <i>None</i>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion mb-3">
+            <div class="accordion-item">
+                <a class="btn btn-outline-light accordion-button collapsed bg-light" data-bs-toggle="collapse" data-bs-target="#collapseLocations">Show all locations</a>
+                <div class="collapse row" id="collapseLocations">
+                    @if (Model.SelectedCompany.Locations?.Any() ?? false)
+                    {
+                        foreach (var location in Model.SelectedCompany.Locations)
+                        {
+                            <div class="accordion-body col">
+                                <p class="btn btn-outline-dark w-100">@location.StreetName @location.ZipCode @location.City</p>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="accordion-body col">
+                            <i>None</i>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion mb-3">
+            <div class="accordion-item">
+                <a class="btn btn-outline-light accordion-button collapsed bg-light" data-bs-toggle="collapse" data-bs-target="#collapseMaterials">Show all materials</a>
+                <div class="collapse row" id="collapseMaterials">
+                    @if (Model.SelectedCompany.Materials?.Any() ?? false)
+                    {
+                        foreach (var material in Model.SelectedCompany.Materials)
+                        {
+                            <div class="accordion-body col-sm-6">
+                                <div class="border border-secondary rounded text-center pt-1 pb-1 w-100 h-100">
+                                    @if (material.BookingId.HasValue)
+                                    {
+                                        <label class="fw-bold">
+                                            @material.Name
+                                            <br />
+                                            <small class="fw-bold" style="color:#871822">Borrowed and connected to a <a href="/@Model.SelectedCompany.Handle/booking/@material.BookingId.Value" target="_blank">booking</a></small>
+                                        </label>
+                                    }
+                                    else
+                                    {
+                                        <label class="fw-bold">
+                                            @material.Name
+                                            <br />
+                                            <small class="fw-bold" style="color:green">Available</small>
+                                        </label>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="accordion-body col">
+                            <i>None</i>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion mb-3">
+            <div class="accordion-item">
+                <a class="btn btn-outline-light accordion-button collapsed bg-light" data-bs-toggle="collapse" data-bs-target="#collapsePackages">Show all packages</a>
+                <div class="collapse row" id="collapsePackages">
+                    @if (Model.SelectedCompany.Packages?.Any() ?? false)
+                    {
+                        foreach (var package in Model.SelectedCompany.Packages)
+                        {
+                            <div class="accordion-body col">
+                                <p class="btn btn-outline-dark w-100">@package.Name</p>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="accordion-body col">
+                            <i>None</i>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row p-3 gap-2">
+            <a href="/company/edit/@Model.SelectedCompany.Id" class="btn btn-company w-100 col">Edit</a>
+            <a href="/@Globals.PageAllCompanies" class="btn btn-secondary w-100 col">Back</a>
+        </div>
+    }
+</div>

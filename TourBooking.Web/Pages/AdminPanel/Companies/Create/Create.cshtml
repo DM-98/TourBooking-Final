@@ -1,0 +1,213 @@
+﻿@page "/create-company"
+
+@model CreateModel
+
+@{
+    ViewData[Globals.Title] = Globals.TitleCreateCompany;
+    ViewData[Globals.CurrentPage] = Globals.PageCreateCompany;
+}
+
+<div class="container-fluid p-3 mb-3 border bg-white col-xs-12 col-sm-10 col-md-8 col-lg-6 col-xxl-4">
+    <h4 class="text-center">Register a new company</h4>
+
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <h4><b>The company</b></h4>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.Name, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.Handle, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.Handle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.Handle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.PhoneNumber, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.LogoUrl, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.LogoUrl, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.LogoUrl, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.Website, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.Website, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.Website, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <h4><b>Headquarter</b></h4>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.StreetName, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.StreetName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.StreetName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.City, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.City, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.ZipCode, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.ZipCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <h4><b>First package</b></h4>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.PackageName, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.PackageName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.PackageName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.PackageDescription, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.PackageDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.PackageDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <h4><b>Primary theme</b></h4>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.PrimaryTextColor, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.PrimaryTextColor, new { htmlAttributes = new { @type = "color", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.PrimaryTextColor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.PrimaryBackgroundColor, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.PrimaryBackgroundColor, new { htmlAttributes = new { @type = "color", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.PrimaryBackgroundColor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.PrimaryContainerColor, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.PrimaryContainerColor, new { htmlAttributes = new { @type = "color", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.PrimaryContainerColor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.PrimaryButtonColor, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.PrimaryButtonColor, new { htmlAttributes = new { @type = "color", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.PrimaryButtonColor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.PrimaryButtonTextColor, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.PrimaryButtonTextColor, new { htmlAttributes = new { @type = "color", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.PrimaryButtonTextColor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.PrimaryNavigationBackgroundColor, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.PrimaryNavigationBackgroundColor, new { htmlAttributes = new { @type = "color", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.PrimaryNavigationBackgroundColor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegisterCompanyInputModel.PrimaryNavigationButtonTextColor, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.RegisterCompanyInputModel.PrimaryNavigationButtonTextColor, new { htmlAttributes = new { @type = "color", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegisterCompanyInputModel.PrimaryNavigationButtonTextColor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="form-group row p-3 gap-2">
+                <button id="submitId" type="submit" asp-page-handler="RegisterCompany" class="btn btn-company w-100 col" onclick="submitClick()">
+                    <span id="spanId" class="spinner-border spinner-border-sm mr-2 d-none"></span> Create company
+				</button>
+
+				<a href="/@Globals.PageAllCompanies" class="btn btn-secondary w-100 col">Back</a>
+			</div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

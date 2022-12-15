@@ -1,0 +1,15 @@
+﻿<div class="alert alert-danger fade show @(TempData["ErrorMessage"] is null ? "d-none" : string.Empty)">
+    <label>@TempData["ErrorMessage"]</label>
+</div>
+
+<div class="alert alert-warning fade show @(TempData["WarningMessage"] is null ? "d-none" : string.Empty)">
+    <label>@TempData["WarningMessage"]</label>
+</div>
+
+<div class="alert alert-info fade show @(TempData["InfoMessage"] is null ? "d-none" : string.Empty)">
+    <label>@TempData["InfoMessage"]</label>
+</div>
+
+<div class="alert alert-success fade show @(TempData["SuccessMessage"] is null ? "d-none" : string.Empty)">
+    <label>@TempData["SuccessMessage"]</label>
+</div>

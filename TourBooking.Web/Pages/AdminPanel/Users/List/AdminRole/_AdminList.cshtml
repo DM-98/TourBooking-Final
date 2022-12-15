@@ -1,0 +1,31 @@
+﻿@model IEnumerable<AdminListDTO>
+
+<div class="container-fluid p-3 mb-3 border">
+    <h5>Administrators</h5>
+
+    <div onbeforeunload="destroyDataTable('#admin-datatable')">
+        <table id="admin-datatable" class="table table-striped table-hover table-bordered display pt-2" style="width: 100%">
+            <thead style="background-color: #c6c6c6">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    <th>Date created</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var admin in Model)
+                {
+                    <tr>
+                        <td>@admin.Name</td>
+                        <td>@admin.Email</td>
+                        <td>@(Html.Raw(admin.PhoneNumber ?? "<i>Ikke angivet</i>"))</td>
+                        <td>@admin.CreatedDate.FormatTime()</td>
+                        <td><a href="/admin/@admin.Id"><span class="details-eye" style="color: @ViewData[Globals.CompanyButtonColor]"></span></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

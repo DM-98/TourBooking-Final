@@ -1,0 +1,79 @@
+﻿@model RegisterEmployeeViewModel
+
+<div class="container">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="container-fluid card mb-4">
+                <div class="card-body p-4 text-center">
+                    <div class="mb-md-2 mt-md-4 pb-2">
+                        <form method="post" asp-page-handler="RegisterEmployee" asp-route-returnUrl="@TempData[Globals.ReturnUrl]">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger fade show"></div>
+
+                            <label><h2 class="fw-bold mb-2 text-uppercase">Register a new employee</h2></label>
+
+                            <hr />
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label required" asp-for="RegisterEmployeeInputModel.Email"></label>
+                                <input type="email" asp-for="RegisterEmployeeInputModel.Email" class="form-control form-control-lg" />
+                                <span asp-validation-for="RegisterEmployeeInputModel.Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label required" asp-for="RegisterEmployeeInputModel.FirstName"></label>
+                                <input type="text" asp-for="RegisterEmployeeInputModel.FirstName" class="form-control form-control-lg" />
+                                <span asp-validation-for="RegisterEmployeeInputModel.FirstName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label required" asp-for="RegisterEmployeeInputModel.LastName"></label>
+                                <input type="text" asp-for="RegisterEmployeeInputModel.LastName" class="form-control form-control-lg" />
+                                <span asp-validation-for="RegisterEmployeeInputModel.LastName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label" asp-for="RegisterEmployeeInputModel.PhoneNumber"></label>
+                                <input type="text" asp-for="RegisterEmployeeInputModel.PhoneNumber" class="form-control form-control-lg" />
+                                <span asp-validation-for="RegisterEmployeeInputModel.PhoneNumber" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label required" asp-for="RegisterEmployeeInputModel.Password"></label>
+                                <input type="password" asp-for="RegisterEmployeeInputModel.Password" class="form-control form-control-lg" />
+                                <span asp-validation-for="RegisterEmployeeInputModel.Password" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label required" asp-for="RegisterEmployeeInputModel.ConfirmPassword"></label>
+                                <input type="password" asp-for="RegisterEmployeeInputModel.ConfirmPassword" class="form-control form-control-lg" />
+                                <span asp-validation-for="RegisterEmployeeInputModel.ConfirmPassword" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label required" asp-for="RegisterEmployeeInputModel.CompanyId"></label>
+                                <select class="form-select" asp-for="RegisterEmployeeInputModel.CompanyId">
+                                    @foreach (var company in Model.Companies ?? new List<Company>())
+                                    {
+                                        <option value="@company.Id">@company.Name</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="checkbox" asp-for="RegisterEmployeeInputModel.IsTermsAccepted" class="form-check-input" id="isTermsAccepted" />
+                                <label class="form-check-label required" asp-for="RegisterEmployeeInputModel.IsTermsAccepted" for="isTermsAccepted"></label>
+                                <span asp-validation-for="RegisterEmployeeInputModel.IsTermsAccepted" class="text-danger form-check-inline"></span>
+                            </div>
+
+                            <button id="submitId" class="btn btn-company btn-lg w-100" style="margin-bottom: 2em;" type="submit" onclick="submitClick()">
+                                <span id="spanId" class="spinner-border spinner-border-sm mr-2 d-none"></span> Create employee
+                            </button>
+
+                            <a class="fw-bold" href="/@Globals.PageAllRegistered">Back</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

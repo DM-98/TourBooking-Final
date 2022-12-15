@@ -1,0 +1,160 @@
+﻿@page "/{handle}/create-booking"
+
+@model CreateModel
+
+@{
+    ViewData[Globals.Title] = Globals.TitleCreateBooking;
+    ViewData[Globals.CurrentPage] = !Model.IsAuthenticated ? Globals.PageCreateBooking : Globals.PageBookings;
+}
+
+<div class="container-fluid p-3 mb-3 border bg-white col-xs-12 col-sm-10 col-md-8 col-lg-6 col-xxl-4">
+    <h4 class="text-center">Create a booking for a tour</h4>
+
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreateBookingInputModel.FirstName, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.CreateBookingInputModel.FirstName, new { htmlAttributes = new { @class = "form-control" }})
+                    @Html.ValidationMessageFor(model => model.CreateBookingInputModel.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreateBookingInputModel.LastName, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.CreateBookingInputModel.LastName, new { htmlAttributes = new { @class = "form-control" }})
+                    @Html.ValidationMessageFor(model => model.CreateBookingInputModel.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreateBookingInputModel.Email, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.CreateBookingInputModel.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CreateBookingInputModel.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreateBookingInputModel.PhoneNumber, htmlAttributes: new { @class = "form-label" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.CreateBookingInputModel.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CreateBookingInputModel.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreateBookingInputModel.Organization, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.CreateBookingInputModel.Organization, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CreateBookingInputModel.Organization, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            @if (Model.Packages?.Any() ?? false)
+            {
+                <div class="form-outline form-white mb-4">
+                    @Html.LabelFor(model => model.CreateBookingInputModel.PackageId, htmlAttributes: new { @class = "form-label required" })
+                    @Html.DropDownListFor(model => model.CreateBookingInputModel.PackageId, new SelectList(Model.Packages, "Id", "Name"), new { @class = "form-select" })
+                </div>
+            }
+
+            @if (Model.Materials?.Any() ?? false)
+            {
+                <div class="form-outline form-white mb-4">
+                    @Html.LabelFor(model => model.CreateBookingInputModel.MaterialIds, htmlAttributes: new { @class = "form-label" })
+                    <div class="col-12 w-100">
+                        @Html.ListBoxFor(model => model.CreateBookingInputModel.MaterialIds, new MultiSelectList(Model.Materials, "Id", "Name"), new { @class = "form-select", id = "multiSelectId" })
+                    </div>
+                </div>
+            }
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreateBookingInputModel.DateTime, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.CreateBookingInputModel.DateTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CreateBookingInputModel.DateTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreateBookingInputModel.AlternativeDateTime, htmlAttributes: new { @class = "form-label" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.CreateBookingInputModel.AlternativeDateTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CreateBookingInputModel.AlternativeDateTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreateBookingInputModel.Attendees, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.CreateBookingInputModel.Attendees, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CreateBookingInputModel.Attendees, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreateBookingInputModel.Remark, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.CreateBookingInputModel.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreateBookingInputModel.Remark, "", new { @class = "text-danger" })
+            </div>
+
+            <br />
+
+            <hr />
+
+            <p class="text-center">
+                <b>
+                    Upon creating the booking, you accept the <a href="https://axla.dk/privatlivspolitik/" target="_blank">privacy policy</a>
+                </b>
+            </p>
+
+            <div class="form-group row p-3 gap-2">
+                <button id="submitId" type="submit" asp-page-handler="CreateBooking" class="btn btn-company w-100 col" onclick="submitClick()">
+                    <span id="spanId" class="spinner-border spinner-border-sm mr-2 d-none"></span> Create booking
+                </button>
+
+                <a href="/@(Model.IsAuthenticated ? $"{Model.Company!.Handle}/{Globals.PageBookings}" : Model.Company!.Handle)" class="btn btn-secondary w-100 col">Back</a>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#multiSelectId').multiselect({
+                buttonClass: 'form-select',
+                templates: {
+                    button: '<button type="button" class="multiselect dropdown-toggle" data-bs-toggle="dropdown"><span class="multiselect-selected-text"></span></button>',
+                }
+            });
+        });
+    </script>
+}

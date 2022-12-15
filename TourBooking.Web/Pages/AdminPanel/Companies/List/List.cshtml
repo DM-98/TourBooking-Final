@@ -1,0 +1,57 @@
+﻿@page "/all-companies"
+
+@model ListModel
+
+@{
+    ViewData[Globals.Title] = Globals.TitleAlleCompanies;
+    ViewData[Globals.CurrentPage] = Globals.PageAllCompanies;
+}
+
+<div class="container-fluid p-3 mb-3 border bg-white">
+	<h4>All companies registered in TourBooking</h4>
+	<a class="btn btn-company" href="/@Globals.PageCreateCompany">Create a new company</a>
+
+	<hr />
+
+	<div onbeforeunload="destroyDataTable('#company-datatable')">
+		<table id="company-datatable" class="table table-striped table-hover table-bordered display pt-2" style="width: 100%">
+			<thead style="background-color: #c6c6c6">
+				<tr>
+					<th>Name</th>
+					<th>Handle</th>
+					<th>Headquarter</th>
+					<th>Location count</th>
+					<th>Package count</th>
+					<th>Material count</th>
+					<th>Employee count</th>
+					<th>Date created</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var company in Model.Companies!)
+				{
+					<tr>
+						<td>@company.Name</td>
+						<td><a href="/@company.Handle">/@company.Handle</a></td>
+						<td>@company.HeadquarterStreetName @company.HeadquarterZipCode @company.HeadquarterCity</td>
+						<td>@company.LocationsCount</td>
+						<td>@company.PackagesCount</td>
+						<td>@company.MaterialsCount</td>
+						<td>@company.EmployeesCount</td>
+						<td>@company.CreatedDate.FormatTime()</td>
+						<td><a href="/company/@company.Handle"><span class="details-eye" style="color: @ViewData[Globals.CompanyButtonColor]"></span></a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            initializeDataTable('#company-datatable');
+        });
+    </script>
+}

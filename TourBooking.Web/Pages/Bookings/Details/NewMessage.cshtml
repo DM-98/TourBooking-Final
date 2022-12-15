@@ -1,0 +1,45 @@
+﻿@page "/{handle}/booking/{bookingId}/new-message"
+
+@model NewMessageModel
+
+@{
+    ViewData[Globals.Title] = Globals.TitleWriteANewMessage;
+    ViewData[Globals.CurrentPage] = Globals.PageWriteANewMessage;
+}
+
+<div class="container p-3 mb-3 border bg-white col-xs-12 col-sm-10 col-md-8 col-lg-6 col-xxl-4">
+    <h4 class="text-center">Write a new message</h4>
+
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-outline">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreateMessageInputModel.Content, htmlAttributes: new { @class = "form-label required" })
+                <div class="col-12">
+                    @Html.EditorFor(model => model.CreateMessageInputModel.Content, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CreateMessageInputModel.Content, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="form-group row p-3 gap-2">
+            <button id="submitId" type="submit" asp-page-handler="CreateNewMessage" class="btn btn-company w-100 col" onclick="submitClick()">
+                <span id="spanId" class="spinner-border spinner-border-sm mr-2 d-none"></span> Send message
+            </button>
+
+            <a href="/@Model.Company!.Handle/booking/@Model.BookingId" class="btn btn-secondary w-100 col">Back</a>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

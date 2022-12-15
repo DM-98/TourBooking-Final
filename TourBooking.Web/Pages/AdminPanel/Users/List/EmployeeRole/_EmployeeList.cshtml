@@ -1,0 +1,33 @@
+﻿@model IEnumerable<EmployeeListDTO>
+
+<div class="container-fluid p-3 mb-3 border">
+    <h5>Employees</h5>
+
+    <div onbeforeunload="destroyDataTable('#employee-datatable')">
+        <table id="employee-datatable" class="table table-striped table-hover table-bordered display pt-2" style="width: 100%">
+            <thead style="background-color: #c6c6c6">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    <th>Company</th>
+                    <th>Date created</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var employee in Model)
+                {
+                    <tr>
+                        <td>@employee.Name</td>
+                        <td>@employee.Email</td>
+                        <td>@(Html.Raw(employee.PhoneNumber ?? "<i>Ikke angivet</i>"))</td>
+                        <td>@employee.CompanyName</td>
+                        <td>@employee.CreatedDate.FormatTime()</td>
+                        <td><a href="/employee/@employee.Id"><span class="details-eye" style="color: @ViewData[Globals.CompanyButtonColor]"></span></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

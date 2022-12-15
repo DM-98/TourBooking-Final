@@ -1,0 +1,16 @@
+﻿@page "/{handle}/company-settings"
+
+@model CompanySettingsModel
+
+@{
+    ViewData[Globals.Title] = Globals.TitleCompanySettings;
+    ViewData[Globals.CurrentPage] = Globals.PageCompanySettings;
+}
+
+<div class="container-fluid p-3 mb-3 border bg-white col-xs-12 col-sm-10 col-md-8 col-lg-6 col-xxl-4">
+	<h4>Company settings</h4>
+
+	<hr />
+
+	<p>@Model.Company!.Name</p>
+</div>

@@ -1,0 +1,64 @@
+﻿@{
+    var companyBackgroundColor = ViewData[Globals.CompanyBackgroundColor] ?? Globals.DefaultCompanyBackgroundColor;
+    var companyContainerColor = ViewData[Globals.CompanyContainerColor] ?? Globals.DefaultCompanyContainerColor;
+    var companyTextColor = ViewData[Globals.CompanyTextColor] ?? Globals.DefaultCompanyTextColor;
+    var companyButtonColor = ViewData[Globals.CompanyButtonColor] ?? Globals.DefaultCompanyButtonColor;
+    var companyButtonTextColor = ViewData[Globals.CompanyButtonTextColor] ?? Globals.DefaultCompanyButtonTextColor;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TourBooking</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-html5-2.2.3/b-print-2.2.3/r-2.3.0/datatables.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.2/css/bootstrap-multiselect.min.css" integrity="sha512-fZNmykQ6RlCyzGl9he+ScLrlU0LWeaR6MO/Kq9lelfXOw54O63gizFMSD5fVgZvU1YfDIc6mxom5n60qJ1nCrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        body {
+            background-color: @companyBackgroundColor !important;
+            color: @companyTextColor !important;
+        }
+
+        .btn-company {
+            background-color: @companyButtonColor !important;
+            color: @companyButtonTextColor !important;
+        }
+
+        .container-fluid {
+            background-color: @companyContainerColor !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <partial name="_NavMenu" />
+
+        <main>
+            <div class="content px-4">
+                <partial name="_MessagesPartial" />
+
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container-fluid text-center p-2">
+            &copy; @DateTime.Now.Year - Axla ApS - <a href="https://axla.dk/privatlivspolitik" target="_blank">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <script src="~/js/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-html5-2.2.3/b-print-2.2.3/r-2.3.0/datatables.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.2/js/bootstrap-multiselect.min.js" integrity="sha512-lxQ4VnKKW7foGFV6L9zlSe+6QppP9B2t+tMMaV4s4iqAv4iHIyXED7O+fke1VeLNaRdoVkVt8Hw/jmZ+XocsXQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

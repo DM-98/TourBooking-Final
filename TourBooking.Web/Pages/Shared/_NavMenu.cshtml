@@ -1,0 +1,111 @@
+﻿@{
+    var currentPage = ViewData[Globals.CurrentPage] ?? Globals.DefaultCurrentPage;
+
+    var companyName = ViewData[Globals.CompanyName] ?? Globals.DefaultCompanyName;
+    var companyHandle = ViewData[Globals.CompanyHandle] ?? Globals.DefaultCompanyRouteName;
+    var companyWebsite = ViewData[Globals.CompanyWebsite] ?? Globals.DefaultCompanyWebsite;
+    var companyLogoUrl = ViewData[Globals.CompanyLogoUrl] ?? Globals.DefaultCompanyLogoURL;
+
+    var companyNavigationBackgroundColor = ViewData[Globals.CompanyNavigationBackgroundColor] ?? Globals.DefaultCompanyNavigationBackgroundColor;
+    var companyNavigationButtonTextColor = ViewData[Globals.CompanyNavigationButtonTextColor] ?? Globals.DefaultCompanyNavigationButtonTextColor;
+
+    var isAuthenticated = User.Identity is not null && User.Identity.IsAuthenticated;
+    var isEmployee = User.IsInRole((string)companyHandle);
+    var isAdmin = User.IsInRole(RoleType.Admin.ToString());
+}
+
+<style>
+    .sidebar {
+        background: @companyNavigationBackgroundColor !important;
+    }
+
+    .nav-link {
+        color: @companyNavigationButtonTextColor !important;
+    }
+
+    .admin-panel-label {
+        color: @companyNavigationButtonTextColor !important;
+    }
+</style>
+
+<div class="sidebar">
+    <div class="top-row navbar navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/@companyHandle">
+                <img src="@companyLogoUrl" style="object-fit:contain" height="50" width="150" />
+            </a>
+        </div>
+        <div class="flex-column">
+            <div class="nav-item">
+                <a class="nav-link @(currentPage is Globals.PageHome ? "active" : string.Empty)" href="/@companyHandle"><span class="oi oi-home"></span>@Globals.TitleHome</a>
+            </div>
+
+            @if (!isAuthenticated)
+            {
+                <div class="nav-item">
+                    <a class="nav-link @(currentPage is Globals.PageCreateBooking ? "active" : string.Empty)" href="/@companyHandle/@Globals.PageCreateBooking"><span class="oi oi-calendar"></span>@Globals.TitleCreateBooking</a>
+                </div>
+            }
+            else
+            {
+                if (isEmployee || isAdmin)
+                {
+                    <div class="nav-item">
+                        <a class="nav-link @(currentPage is Globals.PageBookings ? "active" : string.Empty)" href="/@companyHandle/@Globals.PageBookings"><span class="oi oi-calendar"></span>@Globals.TitleBookings</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="nav-item">
+                        <a class="nav-link @(currentPage is Globals.PageBookings? "active" : string.Empty)" href="/@companyHandle/@Globals.PageBookings"><span class="oi oi-calendar"></span>@Globals.TitleMyBookings</a>
+                    </div>
+                }
+            }
+
+            @if (isEmployee || isAdmin)
+            {
+                <div class="nav-item">
+                    <a class="nav-link @(currentPage is Globals.PageCompanySettings ? "active" : string.Empty)" href="/@companyHandle/@Globals.PageCompanySettings"><span class="oi oi-cog"></span>@Globals.TitleCompanySettings</a>
+                </div>
+            }
+
+            @if (isAdmin)
+            {
+                <hr />
+
+                <label class="admin-panel-label mb-2">Admin panel</label>
+
+                <div class="nav-item">
+                    <a class="nav-link @(currentPage is Globals.PageAllCompanies ? "active" : string.Empty)" href="/@Globals.PageAllCompanies"><span class="oi oi-list"></span>@Globals.TitleAlleCompanies</a>
+                </div>
+
+                <div class="nav-item">
+                    <a class="nav-link @(currentPage is Globals.PageAllRegistered ? "active" : string.Empty)" href="/@Globals.PageAllRegistered"><span class="oi oi-people"></span>@Globals.TitleAllRegistered</a>
+                </div>
+            }
+
+            <hr />
+
+            @if (isAuthenticated)
+            {
+                <div class="nav-item">
+                    <a class="nav-link @(currentPage is Globals.PageMyProfile ? "active" : string.Empty)" href="/@companyHandle/@Globals.PageMyProfile"><span class="oi oi-person"></span>@Globals.TitleMyProfile (@(Regex.Replace(User.Identity!.Name!.Split()[0], @"[^0-9a-zA-Z\ ]+", "")))</a>
+                </div>
+
+                <div class="nav-item">
+                    <a class="nav-link btn-logout" onclick="window.location.replace('/@companyHandle/logout?handler=logout')"><span class="oi oi-account-logout"></span>Logout</a>
+                </div>
+            }
+            else
+            {
+                <div class="nav-item">
+                    <a class="nav-link @(currentPage is Globals.PageLogin ? "active" : string.Empty)" href="/@companyHandle/login?returnUrl=@(string.IsNullOrWhiteSpace(Context.Request.Query["returnUrl"].ToString()) ? Context.Request.Path : Context.Request.Query["returnUrl"].ToString())&handle=@companyHandle"><span class="oi oi-person"></span>Login / Register</a>
+                </div>
+            }
+            <hr />
+            <div class="nav-item">
+                <a class="nav-link" href="@companyWebsite"><span class="oi oi-arrow-left"></span>Back to @companyName</a>
+            </div>
+        </div>
+    </div>
+</div>

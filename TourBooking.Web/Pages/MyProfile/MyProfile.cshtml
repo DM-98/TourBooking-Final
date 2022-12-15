@@ -1,0 +1,27 @@
+﻿@page "/{handle}/my-profile"
+@using System.Security.Claims;
+
+@model MyProfileModel
+
+@{
+    ViewData[Globals.Title] = Globals.TitleMyProfile;
+    ViewData[Globals.CurrentPage] = Globals.PageMyProfile;
+}
+
+<div class="container-fluid p-3 mb-3 border bg-white">
+    <h4>My profile</h4>
+
+    <hr />
+
+    <b>Name:</b>
+    <p>@User.Identity!.Name</p>
+
+    <b>Email:</b>
+    <p>@User.Claims.First(x => x.Type == ClaimTypes.Email).Value</p>
+
+    <b>Phone number:</b>
+    <p>@(Html.Raw(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.MobilePhone)?.Value ?? "<i>N/A</i>"))</p>
+
+    <b>User type:</b>
+    <p>@(User.IsInRole(RoleType.Admin.ToString()) ? "Admin" : User.IsInRole(RoleType.Employee.ToString()) ? "Employee" : "Booker")</p>
+</div>
