@@ -1,5 +1,15 @@
 ﻿namespace TourBooking.Core.Enums;
 
+public enum CreateNomi4sBookingErrorType
+{
+    CouldNotCreateNomi4sBooking = 53,
+}
+
+public enum GetNomi4sDetailsErrorType
+{
+    CouldNotFindNomi4sBooking = 53,
+}
+
 public enum LoginErrorType
 {
     CouldNotFindApplicationUser = 1,

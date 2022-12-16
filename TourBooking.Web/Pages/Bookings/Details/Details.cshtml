@@ -83,6 +83,11 @@ else
             <b>Attendees: </b> <p>@Model.Booking.Attendees</p>
             <b>Remark: </b> <p>@(string.IsNullOrWhiteSpace(Model.Booking.Remark) ? Html.Raw("<i>None</i>") : Model.Booking.Remark)</p>
 
+            @if (Model.Company!.Handle == CompanyHandleList.Nomi4s.EnumToString())
+            {
+                <partial name="~/Pages/Bookings/Details/Nomi4s/_Nomi4sDetails.cshtml" />
+            }
+
             @if (User.IsInRole(RoleType.Employee.ToString()) || User.IsInRole(RoleType.Admin.ToString()))
             {
                 <hr />

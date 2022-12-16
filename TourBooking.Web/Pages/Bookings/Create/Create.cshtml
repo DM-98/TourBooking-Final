@@ -115,6 +115,11 @@
 
             <br />
 
+            @if (Model.Company!.Handle == CompanyHandleList.Nomi4s.EnumToString())
+            {
+                <partial name="~/Pages/Bookings/Create/Nomi4s/_Nomi4sCreate.cshtml" />
+            }
+
             <div class="form-group">
                 @Html.LabelFor(model => model.CreateBookingInputModel.Remark, htmlAttributes: new { @class = "form-label" })
                 @Html.EditorFor(model => model.CreateBookingInputModel.Remark, new { htmlAttributes = new { @class = "form-control" } })

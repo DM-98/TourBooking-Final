@@ -2,9 +2,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TourBooking.Core.Constants;
 using TourBooking.Core.Domain;
+using TourBooking.Core.Domain.Nomi4s;
 using TourBooking.Core.DTOs.Outputs;
 using TourBooking.Core.Enums;
+using TourBooking.Core.Helpers;
 using TourBooking.Core.Interfaces;
+using TourBooking.Core.Interfaces.Nomi4s;
 
 namespace TourBooking.Web.Pages.Bookings;
 
@@ -12,17 +15,21 @@ public class DetailsModel : BasePageModel
 {
     public BookingDetailsDTO? Booking { get; set; }
 
+    public Nomi4sBooking? Nomi4sBooking { get; set; }
+
     private readonly ICompanyService companyService;
     private readonly IBookingService bookingService;
     private readonly UserManager<ApplicationUser> userManager;
     private readonly IEmailSender emailSender;
+    private readonly INomi4sBookingService nomi4sBookingService;
 
-    public DetailsModel(ICompanyService companyService, IBookingService bookingService, UserManager<ApplicationUser> userManager, IEmailSender emailSender) : base(companyService)
+    public DetailsModel(ICompanyService companyService, IBookingService bookingService, UserManager<ApplicationUser> userManager, IEmailSender emailSender, INomi4sBookingService nomi4sBookingService) : base(companyService)
     {
         this.companyService = companyService;
         this.bookingService = bookingService;
         this.userManager = userManager;
         this.emailSender = emailSender;
+        this.nomi4sBookingService = nomi4sBookingService;
     }
 
     public async Task<IActionResult> OnGetAsync(string handle, string id)
@@ -69,6 +76,20 @@ public class DetailsModel : BasePageModel
         if (bookingResult.IsSuccess)
         {
             Booking = bookingResult.Content!;
+
+            if (handle == CompanyHandleList.Nomi4s.EnumToString())
+            {
+                var nomi4sBookingResult = await nomi4sBookingService.GetNomi4sDetailsAsync(Guid.Parse(id));
+
+                if (nomi4sBookingResult.IsSuccess)
+                {
+                    Nomi4sBooking = nomi4sBookingResult.Content!;
+                }
+                else
+                {
+                    DisplayWarning("Failed to display Nomi4s specific fields in the booking. If you miss any information, please contact us.");
+                }
+            }
         }
         else
         {

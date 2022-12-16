@@ -1,0 +1,8 @@
+﻿@model DetailsModel
+
+@if (Model.Nomi4sBooking is not null)
+{
+    <b>Age group: </b> <p>@Model.Nomi4sBooking.AgeGroup</p>
+    <b>School grade: </b> <p>@Model.Nomi4sBooking.SchoolGrade</p>
+    <b>Transport payment requested: </b> <p>@(Model.Nomi4sBooking.IsTransportPaymentRequested ? "Yes" : "No")</p>
+}

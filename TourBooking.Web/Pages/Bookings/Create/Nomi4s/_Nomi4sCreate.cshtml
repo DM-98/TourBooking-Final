@@ -1,0 +1,38 @@
+﻿@model CreateModel
+
+<div class="form-group">
+    @Html.LabelFor(model => model.CreateNomi4sBookingInputModel.AgeGroup, htmlAttributes: new { @class = "form-label required" })
+    <div class="col-12">
+        @Html.EditorFor(model => model.CreateNomi4sBookingInputModel.AgeGroup, new { htmlAttributes = new { @class = "form-control" }})
+        @Html.ValidationMessageFor(model => model.CreateNomi4sBookingInputModel.AgeGroup, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<br />
+
+<div class="form-group">
+    @Html.LabelFor(model => model.CreateNomi4sBookingInputModel.SchoolGrade, htmlAttributes: new { @class = "form-label required" })
+    <div class="col-12">
+        @Html.EditorFor(model => model.CreateNomi4sBookingInputModel.SchoolGrade, new { htmlAttributes = new { @class = "form-control" }})
+        @Html.ValidationMessageFor(model => model.CreateNomi4sBookingInputModel.SchoolGrade, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<br />
+
+<div class="form-group">
+    <label asp-for="CreateNomi4sBookingInputModel.IsTransportPaymentRequested" class="form-label required"></label>
+    <p><small class="ps-2">Principper for at få betalt transportudgifter - <a href="http://nomi4s.espresso4.dk/Default.aspx?ID=6756&Purge=True" target="_blank">Læs mere her</a></small></p>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" id="isTransportPaymentRequestedYes" asp-for="CreateNomi4sBookingInputModel.IsTransportPaymentRequested" type="radio" value="true" />
+        <label class="form-check-label" for="isTransportPaymentRequestedYes">Vi ønsker betalt elevtransport</label>
+    </div>
+    <br />
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" id="isTransportPaymentRequestedNo" asp-for="CreateNomi4sBookingInputModel.IsTransportPaymentRequested" type="radio" value="false" />
+        <label class="form-check-label" for="isTransportPaymentRequestedNo">Vi ønsker IKKE betalt elevtransport</label>
+    </div>
+    <span asp-validation-for="CreateNomi4sBookingInputModel.IsTransportPaymentRequested" class="text-danger d-block"></span>
+</div>
+
+<br />

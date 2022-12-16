@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using TourBooking.Core.Domain;
+using TourBooking.Core.Domain.Nomi4s;
 using TourBooking.Core.Interfaces;
+using TourBooking.Core.Interfaces.Nomi4s;
 using TourBooking.Infrastructure.Context;
 using TourBooking.Infrastructure.EmailSenders;
 using TourBooking.Infrastructure.Repositories;
 using TourBooking.Infrastructure.Services;
+using TourBooking.Infrastructure.Services.Nomi4s;
 
 namespace TourBooking.Web.CompositionRoot;
 
@@ -31,6 +34,9 @@ public static class ConfigureServices
         services.AddTransient<IBookingService, BookingService>();
 
         services.AddScoped<IEmailSender, SMTPEmailSender>();
+
+        services.AddScoped<IRepository<Nomi4sBooking>, EFRepository<Nomi4sBooking, TourBookingDbContext>>();
+        services.AddScoped<INomi4sBookingService, Nomi4sBookingService>();
 
         return services;
     }

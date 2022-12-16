@@ -3,49 +3,53 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TourBooking.Core.Domain;
+using TourBooking.Core.Domain.Nomi4s;
 
 namespace TourBooking.Infrastructure.Context;
 
 public sealed class TourBookingDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>, IDataProtectionKeyContext
 {
-	public DbSet<Admin> Admins { get; set; }
+    public DbSet<Admin> Admin { get; set; }
 
-	public DbSet<Employee> Employees { get; set; }
+    public DbSet<Employee> Employee { get; set; }
 
-	public DbSet<Booker> Bookers { get; set; }
+    public DbSet<Booker> Booker { get; set; }
 
-	public DbSet<Booking> Bookings { get; set; }
+    public DbSet<Booking> Booking { get; set; }
 
-	public DbSet<Company> Companies { get; set; }
+    public DbSet<Nomi4sBooking> Nomi4sBooking { get; set; }
 
-	public DbSet<Location> Locations { get; set; }
+    public DbSet<Company> Company { get; set; }
 
-	public DbSet<Log> Logs { get; set; }
+    public DbSet<Location> Location { get; set; }
 
-	public DbSet<Material> Materials { get; set; }
+    public DbSet<Log> Log { get; set; }
 
-	public DbSet<Message> Messages { get; set; }
+    public DbSet<Material> Material { get; set; }
 
-	public DbSet<Package> Packages { get; set; }
+    public DbSet<Message> Message { get; set; }
 
-	public DbSet<Theme> Themes { get; set; }
+    public DbSet<Package> Package { get; set; }
 
-	public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
+    public DbSet<Theme> Theme { get; set; }
 
-	public TourBookingDbContext(DbContextOptions<TourBookingDbContext> options) : base(options)
-	{
-	}
+    public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
 
-	protected override void OnModelCreating(ModelBuilder builder)
-	{
-		base.OnModelCreating(builder);
+    public TourBookingDbContext(DbContextOptions<TourBookingDbContext> options) : base(options)
+    {
+    }
 
-		builder.Entity<ApplicationUser>().ToTable("Users");
-		builder.Entity<IdentityUserRole<Guid>>().ToTable("UsersRoles");
-		builder.Entity<IdentityUserClaim<Guid>>().ToTable("UsersClaims");
-		builder.Entity<IdentityUserLogin<Guid>>().ToTable("UsersLogins");
-		builder.Entity<IdentityUserToken<Guid>>().ToTable("UsersTokens");
-		builder.Entity<IdentityRole<Guid>>().ToTable("Roles");
-		builder.Entity<IdentityRoleClaim<Guid>>().ToTable("RolesClaims");
-	}
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+        builder.Entity<DataProtectionKey>().ToTable("DataProtectionKey");
+        builder.Entity<ApplicationUser>().ToTable("User");
+        builder.Entity<IdentityUserRole<Guid>>().ToTable("UsersRoles");
+        builder.Entity<IdentityUserClaim<Guid>>().ToTable("UsersClaims");
+        builder.Entity<IdentityUserLogin<Guid>>().ToTable("UsersLogins");
+        builder.Entity<IdentityUserToken<Guid>>().ToTable("UsersTokens");
+        builder.Entity<IdentityRole<Guid>>().ToTable("Role");
+        builder.Entity<IdentityRoleClaim<Guid>>().ToTable("RolesClaims");
+    }
 }

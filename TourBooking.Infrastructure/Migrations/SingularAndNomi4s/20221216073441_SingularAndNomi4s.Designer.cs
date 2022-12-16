@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TourBooking.Infrastructure.Context;
 
 #nullable disable
 
-namespace TourBooking.Infrastructure.Migrations.Initial
+namespace TourBooking.Infrastructure.Migrations.SingularAndNomi4s
 {
     [DbContext(typeof(TourBookingDbContext))]
-    partial class TourBookingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221216073441_SingularAndNomi4s")]
+    partial class SingularAndNomi4s
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

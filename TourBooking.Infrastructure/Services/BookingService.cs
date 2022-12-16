@@ -105,12 +105,13 @@ public sealed class BookingService : BaseService<Booking>, IBookingService
             else
             {
                 var booker = await bookerRepository.GetTable()
+                    .Where(x => x.ApplicationUserId == applicationUser.Id)
                     .Select(x => new Booker
                     {
                         Id = x.Id,
-                        Organization = x.Organization
+                        Organization = x.Organization,
                     })
-                    .FirstOrDefaultAsync(x => x.ApplicationUserId == applicationUser.Id, cancellationToken);
+                    .FirstOrDefaultAsync(cancellationToken);
 
                 if (booker is null)
                 {
@@ -172,7 +173,7 @@ public sealed class BookingService : BaseService<Booking>, IBookingService
                     return new ResponseDTO<Booking>(false, "Failed to send email - contact a server administrator.", CreateBookingErrorType.CouldNotSendEmail);
                 }
 
-                return new ResponseDTO<Booking>(false, "The booking was created, but we require you to confirm your email address by following the instructions sent to you through email.", CreateBookingErrorType.EmailNotConfirmed);
+                return new ResponseDTO<Booking>(false, "The booking was created, but we require you to confirm your email address by following the instructions sent to you through email.", CreateBookingErrorType.EmailNotConfirmed, content: createdBooking);
             }
 
             return new ResponseDTO<Booking>(true, content: createdBooking);

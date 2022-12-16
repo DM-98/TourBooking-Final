@@ -2,6 +2,6 @@
 
 public enum CompanyHandleList
 {
-	Axla = 1,
-	Nomi4s = 2,
+    Axla = 1,
+    Nomi4s = 2,
 }
