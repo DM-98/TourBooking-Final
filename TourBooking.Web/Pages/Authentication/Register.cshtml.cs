@@ -44,8 +44,8 @@ public class RegisterModel : BasePageModel
         else
         {
             DisplayError(registerBookerResult);
-
-            return Page();
         }
+
+        return RedirectToPage();
     }
 }

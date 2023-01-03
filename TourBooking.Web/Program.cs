@@ -34,7 +34,7 @@ else
 
 app.UseCookieJWTAuthorize();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();

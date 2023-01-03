@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TourBooking.Core.Domain;
 using TourBooking.Core.Domain.Nomi4s;
 using TourBooking.Core.DTOs.Inputs.Nomi4s;
 using TourBooking.Core.DTOs.Outputs;

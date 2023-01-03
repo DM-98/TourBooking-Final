@@ -129,7 +129,7 @@ public class DetailsModel : BasePageModel
             DisplayError(toggleBookingResult);
         }
 
-        return Page();
+        return RedirectToPage();
     }
 
     public async Task<IActionResult> OnPostReopenBookingAsync(string bookingId)
@@ -139,14 +139,12 @@ public class DetailsModel : BasePageModel
         if (toggleBookingResult.IsSuccess)
         {
             DisplaySuccess($"The booking ({bookingId}) has been reactivated.");
-
-            return RedirectToPage();
         }
         else
         {
             DisplayError(toggleBookingResult);
         }
 
-        return Page();
+        return RedirectToPage();
     }
 }

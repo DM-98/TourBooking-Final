@@ -62,7 +62,7 @@ public static class Globals
     public const string TitleCompanySettings = "Company settings";
     public const string PageCompanySettings = "company-settings";
 
-    public const string TitleAlleCompanies = "All companies";
+    public const string TitleAllCompanies = "All companies";
     public const string PageAllCompanies = "all-companies";
 
     public const string TitleAllRegistered = "All registered";

@@ -57,7 +57,7 @@
                 else
                 {
                     <div class="nav-item">
-                        <a class="nav-link @(currentPage is Globals.PageBookings? "active" : string.Empty)" href="/@companyHandle/@Globals.PageBookings"><span class="oi oi-calendar"></span>@Globals.TitleMyBookings</a>
+                        <a class="nav-link @(currentPage is Globals.PageBookings ? "active" : string.Empty)" href="/@companyHandle/@Globals.PageBookings"><span class="oi oi-calendar"></span>@Globals.TitleMyBookings</a>
                     </div>
                 }
             }
@@ -76,7 +76,7 @@
                 <label class="admin-panel-label mb-2">Admin panel</label>
 
                 <div class="nav-item">
-                    <a class="nav-link @(currentPage is Globals.PageAllCompanies ? "active" : string.Empty)" href="/@Globals.PageAllCompanies"><span class="oi oi-list"></span>@Globals.TitleAlleCompanies</a>
+                    <a class="nav-link @(currentPage is Globals.PageAllCompanies ? "active" : string.Empty)" href="/@Globals.PageAllCompanies"><span class="oi oi-list"></span>@Globals.TitleAllCompanies</a>
                 </div>
 
                 <div class="nav-item">
@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="nav-item">
-                    <a class="nav-link btn-logout" onclick="window.location.replace('/@companyHandle/logout?handler=logout')"><span class="oi oi-account-logout"></span>Logout</a>
+                    <a class="nav-link btn-logout" href="/@companyHandle/logout"><span class="oi oi-account-logout"></span>Logout</a>
                 </div>
             }
             else

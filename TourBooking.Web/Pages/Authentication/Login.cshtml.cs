@@ -51,7 +51,7 @@ public class LoginModel : BasePageModel
                 Expires = loginInputModel.RememberMe ? DateTimeOffset.UtcNow.AddDays(Convert.ToDouble(configuration["JWT:RefreshTokenExpiryInDays"])) : null,
             };
 
-            HttpContext.Response.Cookies.Append("RememberMe", dataProtector.Protect(LoginInputModel.RememberMe ? "true" : "false"), cookieOptions);
+            HttpContext.Response.Cookies.Append("RememberMe", dataProtector.Protect(loginInputModel.RememberMe ? "true" : "false"), cookieOptions);
             HttpContext.Response.Cookies.Append("AccessToken", dataProtector.Protect(loginResult.Content!.AccessToken), cookieOptions);
             HttpContext.Response.Cookies.Append("RefreshToken", dataProtector.Protect(loginResult.Content.RefreshToken), cookieOptions);
 
@@ -62,6 +62,6 @@ public class LoginModel : BasePageModel
             DisplayError(loginResult);
         }
 
-        return Page();
+        return RedirectToPage();
     }
 }

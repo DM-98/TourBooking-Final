@@ -1,29 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
-using TourBooking.Core.Interfaces;
 
 namespace TourBooking.Web.Pages.Authentication;
 
 public class LogoutModel : BasePageModel
 {
-    public LogoutModel(ICompanyService companyService) : base(companyService)
+    public IActionResult OnGet(string handle)
     {
-    }
-
-    public async Task<IActionResult> OnGetAsync(string handle)
-    {
-        if (!await LoadCompanyThemeAsync(handle))
-        {
-            return LocalRedirect(LocalErrorPage);
-        }
-
-        return Page();
-    }
-
-    public IActionResult OnGetLogout(string handle)
-    {
+#if DEBUG
         Response.Cookies.Delete("AccessToken", new CookieOptions { Secure = true });
         Response.Cookies.Delete("RefreshToken", new CookieOptions { Secure = true });
         Response.Cookies.Delete("RememberMe", new CookieOptions { Secure = true });
+#else
+        Response.Cookies.Delete("AccessToken", new CookieOptions { Secure = false });
+        Response.Cookies.Delete("RefreshToken", new CookieOptions { Secure = false });
+        Response.Cookies.Delete("RememberMe", new CookieOptions { Secure = false });
+#endif
 
         return LocalRedirect("~/" + handle);
     }
